@@ -23,7 +23,7 @@
         <!-- math.js is required for math calculations -->
         <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
         <!-- SELL library -->
-		<script src="node_modules/sell/build/js/sell.min.js"></script>
+		<script src="node_modules/sellquiz/build/js/sell.min.js"></script>
 
 	</head>
 	<body>
@@ -80,7 +80,7 @@
 			if(task == null)
 				task = "ma2-4.txt";
 			let timestamp = ts = Math.round((new Date()).getTime() / 1000);
-			task = 'node_modules/sell/examples/' + task + '?time=' + timestamp;
+			task = 'node_modules/sellquiz/examples/' + task + '?time=' + timestamp;
 			$.ajax({
 				url: task,
 				type: 'GET',
