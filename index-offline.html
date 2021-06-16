@@ -1,0 +1,64 @@
+<!-- Minimum Working Example (MWE) to embed SELL questions into your website -->
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<title>Training</title>
+		<meta charset="utf-8">
+        <!-- We use Bootstrap CSS for a nice look, but this is optional -->
+		<link rel = "stylesheet" href = "node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <!-- MathJax is used to rendering equations. SELL outputs HTML code 
+            containing mathematical equations embedded into a pair of accent
+            graves: for example `a^2 = b^2 + c2`. You can use your on eqution
+            renderer instead! -->
+        <script>MathJax = { loader: {load: ['input/asciimath', 'output/svg', 'ui/menu'] }, };</script>
+		<script type="text/javascript" id="MathJax-script" async src="node_modules/mathjax/es5/startup.js"></script>
+        <!-- math.js is required for math calculations -->
+        <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
+        <!-- SELL library -->
+		<script src="node_modules/sell/build/js/sell.min.js"></script>
+	</head>
+	<body>
+        <br/>
+        <!-- a Boostrap container (for nice look; not necessary) -->
+		<div id="container" class="container">
+            <!-- a div to embed sell quetions (refer to JavaScript code below) -->
+            <div id="sellQuestions"></div>
+		</div>
+	</body>
+	<script>
+        /* Initialize SELL: Parameters: 
+           1.) language: "en" := English, "de" := German
+           2.) instanceID := identifier of the SELL-object variable
+               (must be global, i.e. declare "var sell" and NOT "let sell")
+           3.) debug: true/false
+           4.) environment: "standalone" (default), "MUMIE" (TODO) */
+        var sellinst = new sell.Sell("en", "sellinst", false, "standalone");
+        /* Create one or multiple questions (INDENTATION IS OMPORTANT!!!)
+           Multiple questions can be separated by a line containing '%%%' */
+        let q = `Transpose Matrix     #myfirstquestion
+	A in MM(2 x 3 | { 1, 2, 3 } )
+	B := A^T
+	input rows := resizable
+	input cols := resizable
+Please solve $ A^T = #B $`;
+q = `Fakultät
+	a in { 3, 4, 5, 6}
+	f := a!
+Geben Sie $ a! $ wertmäßig an (Lösung ist $f$):
+* $ #f $`;
+        // Import question
+        ok = sellinst.importQuestions(q);
+        // Log errors
+        if(!ok)
+            alert.log(sellinst.log);
+        // Write generated HTML code into an HTML element
+        var sellQuestionsDiv = document.getElementById("sellQuestions");
+        sellQuestionsDiv.innerHTML = sellinst.html;
+        /* When HTML code is set to the document tree, we need to update
+           all matrix input instances once */
+        sellinst.updateMatrixInputs();
+        /* Equations are rendered with MathJax. It depends on your MathJax
+           instance, if the following manual update is required or not. */
+        setTimeout(function(){ MathJax.typeset(); }, 250);
+	</script>
+</html>
