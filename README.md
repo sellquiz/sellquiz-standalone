@@ -13,16 +13,18 @@ This repository demonstates the embedding of SELL-quizzes into websites.
 
 ### Usage:
 
-0. (Install the npm-package manager Refer to https://www.npmjs.com/get-npm)
+1. Install the npm-package manager (Refer to https://www.npmjs.com/get-npm)
 
-1. Get the source code of this repository:
+2. Get the source code of this repository:
 `git clone https://github.com/sellquiz/sellquiz-standalone.git`
 
-2. Install the dependencies:
+3. Install the dependencies:
 `npm install`
 
-3.a Example that entirely works offline:
+4. Run an example that runs entirely offline:
+
 Open `index-offline.html` in your favorite browser.
 
-3.b Example that fetches questions by HTTP-Request:
+5. Run an example that fetches questions by HTTP-Request:
+
 Run a HTTP-Server (e.g. use the provided Bash-Script `./server-sh`) and open `http://localhost:8001/index.html?task=ma1-1.txt`. The property `task` refers to one of the exercises files in path `node_modules/sellquiz/exercises`.
