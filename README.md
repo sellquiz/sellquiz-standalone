@@ -3,7 +3,7 @@
 This repository demonstates the usage of SELL-quizzes 
 
 Project website: https://sell.f07-its.fh-koeln.de/
-
+Main SELL-repository: https://github.com/sellquiz/sellquiz
 Project maintainer: [Andreas Schwenk](https://www.th-koeln.de/personen/andreas.schwenk/) / [TH Köln](https://www.th-koeln.de). 
 
 ### Usage:
@@ -13,7 +13,11 @@ Project maintainer: [Andreas Schwenk](https://www.th-koeln.de/personen/andreas.s
 1. Get the source code of this repository:
 `git clone https://github.com/sellquiz/sellquiz-standalone.git`
 
-2. Install the dependencies (:
+2. Install the dependencies:
 `npm install`
 
-3. `index-offline.html` in your Browser or run './server-sh' and open `index.html`
+3.a Example that entirely works offline:
+Open `index-offline.html` in your favorite browser.
+
+3.b Example that fetches questions by HTTP-Request:
+Run a HTTP-Server (e.g. use the provided Bash-Script `./server-sh`) and open `http://localhost:8001/index.html?task=ma1-1.txt`. The property `task` refers to one of the exercises files in path `node_modules/sellquiz/exercises`.
