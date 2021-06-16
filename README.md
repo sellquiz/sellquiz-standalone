@@ -1,6 +1,7 @@
 # SELL Quiz - Standalone Examples
 
-This repository demonstates the usage of SELL-quizzes 
+This repository demonstates the embedding of SELL-quizzes into websites.
+(We will also release plugins for Moodle and Ilias. As soon as these tools are available, we will put a link here)
 
 Project website: https://sell.f07-its.fh-koeln.de/
 Main SELL-repository: https://github.com/sellquiz/sellquiz
