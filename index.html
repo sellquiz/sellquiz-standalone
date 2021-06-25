@@ -1,17 +1,9 @@
+<!-- Minimum Working Example (MWE) to embed SELL questions into your website -->
 <!DOCTYPE html>
 <html lang="de">
     <head>
         <title>Training</title>
-
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />
-
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-        <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
         <!-- We use Bootstrap CSS for a nice look, but this is optional -->
         <link rel = "stylesheet" href = "node_modules/bootstrap/dist/css/bootstrap.min.css" />
         <!-- MathJax is used to rendering equations. SELL outputs HTML code 
@@ -23,94 +15,38 @@
         <!-- math.js is required for math calculations -->
         <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
         <!-- SELL library -->
-        <script src="node_modules/sellquiz/build/js/sell.min.js"></script>
-
+        <script src="node_modules/sellquiz/build/js/sellquiz.min.js"></script>
     </head>
     <body>
+        <br/>
+        <!-- a Boostrap container (for nice look; not necessary) -->
         <div id="container" class="container">
-            <br/>
-            <span id="course-id"></span><br/>
-            <a href="javascript:goBack()">Zurück</a>
-            <br/><br/>
-            <h1 id="quiz-id"></h1>
-            <h3>Trainingsaufgaben</h3>
-            <br/>
-            <p class="text-light bg-secondary">&nbsp;Klicken Sie zur Kontrolle auf den Haken unterhalb der jeweiligen Augabe.</p>
-            <p class="text-dark"><em>
-                <!--Hinweise:-->
-                <ul>
-                    <li>
-                        Diese Seite wird zu 100 &#37; in Ihrem Browser ausgeführt und speichert keine Daten auf Servern.
-                    </li>
-                    <li>
-                        Sie können diese Seite aktualisieren, um neue randomisierte Aufgaben zu erhalten.
-                    </li>
-                </ul>
-            </em></p>
-            <b><!--Bei einigen Aufgaben geben Sie als Lösung einen Vektor oder eine Matrix an.
-                Nicht immer ist die Anzahl an Zeilen und Spalten fest vorgegeben.
-                In diesen Fällen legen Sie zunächst durch [+] und [-] die Anzahl an Zeilen und/oder Spalten fest.
-                Geben Sie dann die Einträge wertmäßig an.
-            --></b>
-            <div class="row">
-                <div class="col-sm">
-                    <div id="sellQuestions" class="p-3"></div>
-                </div>
-            </div>
-            <br/>
-            <a href="javascript:goBack()">Zurück</a>
-            <br/><br/>
-            Kontakt: <a href="https://www.th-koeln.de/personen/andreas.schwenk/">Andreas Schwenk, TH K&ouml;ln</a>
-            <br/><br/>
-            <img src="img/logo-th-koeln.svg" style="width:96px;"/>
-            <br/><br/>
+            <!-- a div to embed sell quetions (refer to JavaScript code below) -->
+            <div id="sellQuestions"></div>
         </div>
     </body>
-
     <script>
 
-        var sellinst = null;
-        
-        function goBack() {
-            window.history.back();
-        }
-        $( document ).ready(function() {
-            const params = new URLSearchParams(window.location.search);
-            let task = params.get('task');
-            if(task == null)
-                task = "ma2-4.txt";
-            let timestamp = ts = Math.round((new Date()).getTime() / 1000);
-            task = 'node_modules/sellquiz/examples/' + task + '?time=' + timestamp;
-            $.ajax({
-                url: task,
-                type: 'GET',
-                success: function(data,status,xhr) {
-                    let q = xhr.responseText;
-                    let lines = q.split("\n");
-                    for(let i=0; i<lines.length; i++) {
-                        let line = lines[i];
-                        if(line.startsWith("%course"))
-                            document.getElementById("course-id").innerHTML = line.substr(7).trim();
-                        else if(line.startsWith("%quiz")) {
-                            document.getElementById("quiz-id").innerHTML = line.substr(5).trim();
-                            break;
-                        }
-                    }
-                    /**/let debug = false;/**/
-                    sellinst = new sell.Sell("de", "sellinst", debug);
-                    // object sellinst MUST be global, i.e. "var sellinst".
-                    // second parameter MUST be equal to the name of global SELL object.
-                    if(!sellinst.importQuestions(q))
-                        alert(sellinst.log);
-                    var sellQuestionsDiv = document.getElementById("sellQuestions");
-                    sellQuestionsDiv.innerHTML = sellinst.html;
-                    sellinst.updateMatrixInputs();
-                    setTimeout(function(){ MathJax.typeset(); }, 750);
-                },
-                error: function(xhr, status, error) {
-                    alert("ERROR: " + xhr.responseText);
-                }
-            });
-        });
+        // THIS FILE DEMONSTRATES THE HIGH-LEVEL API OF SELL.
+        // REFER TO https://github.com/sellquiz/sellquiz/ FOR LOW LEVEL API INFORMATION.
+        // REFER TO index.html (in this directory) FOR AN EXAMPLE WITH HTTP-REQUESTS.
+
+        let code = `Transpose Matrix     #myfirstquestion
+    A in MM(2 x 3 | { 1, 2, 3 } )
+    B := A^T
+    input rows := resizable
+    input cols := resizable
+Please solve $ A^T = #B $`;
+
+        // ===== HIGH LEVEL API =====
+        sellquiz.setLanguage("en");
+        let sellQuestionsDiv = document.getElementById("sellQuestions");
+        if(sellquiz.autoCreateQuiz(code, sellQuestionsDiv) == false)
+            alert(sellquiz.getErrorLog());
+
+        /* Equations are rendered with MathJax. It depends on your MathJax
+           instance, if the following manual update is required or not. */
+        setTimeout(function(){ MathJax.typeset(); }, 250);
+
     </script>
 </html>
