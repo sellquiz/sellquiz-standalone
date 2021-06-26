@@ -1,6 +1,6 @@
 # SELL Quiz - Standalone Examples
 
-This repository demonstates the embedding of SELL-quizzes into websites.
+This repository demonstrates the embedding of SELL-quizzes into websites.
 
 (We will also release plugins for Moodle and Ilias. As soon as these tools are available, we will put a link here).
 
@@ -27,5 +27,5 @@ This repository demonstates the embedding of SELL-quizzes into websites.
 5. Run an example that runs entirely offline:
    - Open `index.html` in your favorite browser.
 
-6. Run an example that fetches questions by HTTP-Request:
-   - Run a HTTP-Server (e.g. use the provided Bash-Script `./server.sh`) and open `http://localhost:8001/index-dynamic.html?task=ma1-1.txt`. The property `task` refers to one of the exercises files in path `node_modules/sellquiz/exercises`.
+6. Run an example that fetches questions by HTTP-requests:
+   - Run an HTTP-Server (e.g., use the provided Bash-Script `./server.sh`) and open `http://localhost:8001/index-dynamic.html?task=ma1-1.txt`. The property `task` refers to one of the exercises files in path `node_modules/sellquiz/exercises`.
