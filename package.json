@@ -1,5 +1,17 @@
 {
+  "name": "sellquiz-standalone-examples",
+  "version": "2.0.1",
+  "description": "This repository demonstrates the usage of the SELL question type.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sellquiz/sellquiz-standalone.git"
+  },
+  "author": "TH Köln / Andreas Schwenk",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.1",
     "jquery": "^3.6.0",
     "mathjax": "^3.1.4",
