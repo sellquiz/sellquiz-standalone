@@ -4,6 +4,8 @@ This repository demonstrates the embedding of SELL-quizzes into websites.
 
 (We will also release plugins for Moodle and Ilias. As soon as these tools are available, we will put a link here).
 
+If you are interested in using the low-level API (for example to embed SELL into an E-Learning Management System), please refer to the main SELL repository: https://github.com/sellquiz/sellquiz
+
 ### Links:
 
 - Project website: https://sell.f07-its.fh-koeln.de/
@@ -18,10 +20,10 @@ This repository demonstrates the embedding of SELL-quizzes into websites.
 2. Get the source code of this repository:
 `git clone https://github.com/sellquiz/sellquiz-standalone.git`
 
-3. Change the directory:
+3. Change the cloned repository:
 `cd sellquiz-standalone`
 
-4. Install the dependencies:
+4. Install all dependencies:
 `npm install`
 
 5. Run an example that runs entirely offline:
